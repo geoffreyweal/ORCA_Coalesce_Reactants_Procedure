@@ -282,6 +282,133 @@ Scaling factor for frequencies =  1.000000000  (already applied!)
 ```
 
 
+## Step 2: Move the two Reactants from eachother using a SCAN calculation
+
+We will now move the Cu atom away from the benzylamine in this example using a SCAN calculation. To perform a SCAN, we first include this line in our input file:
+
+```
+!OPT NormalOPT TightSCF defgrid2 # Try TightOPT if you have convergence problems. 
+```
+
+The tags here indicate you want to do the following: 
+
+* ``OPT``: Indicates you want ORCA to perform a local optimisation. 
+* ``NormalOPT``: For these calculations we are only wanting to get a good idea of what the transition state looks like. So we dont need to both with using tight convergence settings. Normal convergence sets is perfect for SCAN as it is the usual convergence criteria for performing optimisations, as will run faster than using ``TightOPT``. However, if you have problems with convergence issues, you can try using ``TightOPT``. See ORCA 5.0.4 Manual, page 20 for more info.
+* ``TightSCF``: Tells ORCA to tighten the convergence criteria for each electronic step. 
+* ``defgrid2``: Indicates how fine we want the intergration grid to be (This is the default)
+
+We also include the following lines:
+
+```
+%geom 
+    SCAN B 2 17 = 2.693, 30.693, 1401 END 
+END
+```
+
+In this example, we have told ORCA to begin by setting the distance between atom 2 (one of the C atoms in the benzene ring) and 17 (the Cu atom) to 2.693 Å, and then increase the distance between these two atoms to 30.693 Å in increments of $\frac{30.693-2.693}{1401-1} = 0.02$ Å. 
+
+**NOTE 1**: You will want to measure the initial distance between your two atoms using a GUI like ASE GUI. This is the value you want to put in for the initial bond distance. This is how I got the bond distance between atom 2 and 17 to 2.693 Å for this example. 
+
+**NOTE 2**: ORCA counts atoms starting from 0. This means that in some GUIs (like GView), atom 2 here is atom 3 in GView. **In the ASE GUI and all the programs given here, atoms numbers are equal to ORCA. I.e.: atom 2 in the ASE GUI means atom 2 in ORCA**. 
+
+**NOTE 3**: We have set the number of steps to perform to 1401 rather than 1400. This is because we are including the endpoint in our SCAN, and I want the increments to be spaced by a rational value (i.e.: $\frac{30.693-2.693}{1401-1} = 0.02$ Å step size). This is just a personal preference of mine, and is not a hard rule. 
+
+In this example, we are looking at how a Cu atom could insert itself into a C-H bond. The ``orca.inp`` file for this example is given below (from ``Examples/Step2_SCAN/orca.inp``):
+
+**NOTE 4**: I would recommend using the ``NormalOPT`` convergence settings for SCAN calculations. This is because we are using the SCAN method to roughly make sure that we dont have a transition state, or if it does roughly figuring out what the transition state structure is. ``NormalOPT`` convergence setting is faster than ``TightOPT``, so allows you to try more variations if you run into problems in this state. Also, the  ``NormalOPT`` convergence setting is good, no doubt about it; I am just use to using ``TightOPT``. If you have problems, try tightening the convergence using ``TightOPT``. 
+
+```
+!B3LYP DEF2-TZVP D3BJ
+!OPT NormalOPT TightSCF defgrid2
+%SCF
+    MaxIter 2000       # Here setting MaxIter to a very high number. Intended for systems that require sometimes 1000 iterations before converging (very rare).
+    DIISMaxEq 5        # Default value is 5. A value of 15-40 necessary for difficult systems.
+    directresetfreq 15 # Default value is 15. A value of 1 (very expensive) is sometimes required. A value between 1 and 15 may be more cost-effective.
+END
+%CPCM EPSILON 6.02 REFRAC 1.3723 END
+%PAL NPROCS 32 END
+%maxcore 2000
+%geom 
+    SCAN B 2 17 = 2.693, 30.693, 1401 END 
+END
+* xyzfile 1 1 reactant_opt.xyz
+
+```
+
+**NOTE 1**: ``viewSCAN`` will also create a xyz file called ``SCAN_images.xyz`` that you can copy to your computer if you are using a high-capacity computer (HPC) system and view on your own computer. 
+* If you just want to create the ``SCAN_images.xyz`` file, type into the terminal ``viewSCAN False`` (which will create the ``SCAN_images.xyz`` file). 
+
+You will get a GUI that shows you the following SCAN pathway:
+
+![SCAN Images](Figures/2_SCAN/SCAN_example.gif)
+
+The energy profile for this example is given below:
+
+![SCAN Energy Profile](Figures/2_SCAN/SCAN_energy.png)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+**NOTE 2**: The energy goes up at the end because the hydrogen atom is probably getting too close to the carbon atom. We can ignore this part of the SCAN, as it is not relavant to us for finding the transition state for this mechanistic step. 
+
+The easiest way to use this GUI is to zoom in on the part of the energy profile looks like the transition state (by clicking on the <img src="https://github.com/geoffreyweal/ORCA_Mechanism_Procedure/blob/main/Figures/2A_SCAN/Magnifying_Glass.png?raw=true" alt="drawing" width="25"/> button), and from this determine the image this corresponds to by looking at the x axis. Move the cursor over the highest point along the energy profile, and read the x value:
+
+![SCAN Energy Profile - Zoomed in on Transition State](Figures/2_SCAN/SCAN_energy_zoomed_in.png)
+
+This is what the given transition state looks like in this example:
+
+![SCAN Energy Profile](Figures/2_SCAN/TS_SCAN.png)
+
+This is a promising transition state, but we need to proceed with steps 3 and 4 to make sure it is ok. 
+
+Once ORCA has finished and you have viewed your SCAN pathway and obtained your transition state, you should do the following check:
+
+#### Check: Does the SCAN path make sense chemically and physically
+
+You will want to look at the SCAN path and check if it chemically and physically makes sense. If it does not, you need to redo the SCAN and try something else, like making the two atoms contract closer to each other rather than stretch, or maybe try contracting or expanding the distance between other atoms.  
+
+#### Advice about SCANs
+
+In this example, I forced the SCAN to gradually decrease the distance between atom 11 (C) and atom 14 (H). However, this is not the only way I could have performed this SCAN. 
+* For example, I could have started with the Cu atom bonded to the N atom, and gradually decrease the distance between atoms 11 (C) and 17 (Cu) to force them to form a bond.
+* I decided to start with Cu inserted into the C-H bond and force the C and H to come together because I thought this was the best way to obtain the transition state for this mechanistic step.
+* It is not uncommon that you need to try a few different SCAN paths to get the transition state you are looking for. 
+
+#### Other Information about performing SCANs in ORCA
+
+See https://sites.google.com/site/orcainputlibrary/geometry-optimizations/tutorial-saddlepoint-ts-optimization-via-relaxed-scan for more information. 
+
+
+
+
+
+
+
+
+
 
 
 
