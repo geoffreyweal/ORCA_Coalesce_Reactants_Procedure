@@ -395,9 +395,9 @@ There is nothing new to learn from step 1, everything is exactly the same. See t
 
 Before finalising everything, it is important to do a final check that everything is all good and that there are no issues with your output files from this proceedure and you are happy with all the calculations and the decisions you made, as this process is often not smooth and requires playing around. So finalising everything is a good idea to make sure you haven't missed anything important. 
 
-## Step 6: Obtain the energies and structures of your reactants, products, and transition state
+## Step 5: Obtain the energy difference from coalescing your reactants
 
-We now can obtain the energies and structures for the reactant, product, and transition state. 
+We now can obtain the energies and structures for your system before and after your reactants coalesce together. 
 
 **NOTE 1**: We want to take the Gibb's Free Energy, so make sure you take this energy value from the ``output.out`` files. We can obtain this value because we have run the vibrational frequency calculation, which allows the vibrational entropy to be calculated. You will find these if you look for the ``GIBBS FREE ENERGY`` header in the ``output.out`` file. 
 
