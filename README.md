@@ -397,31 +397,35 @@ Before finalising everything, it is important to do a final check that everythin
 
 ## Step 6: Obtain the energies and structures of your reactants, products, and transition state
 
-We now can obtain the energies and structures for the reactant, product, and transition state. To do this, we want to compare the energies of the ``Reactant`` and ``Product`` with the ``Forward`` and ``Backwards`` structure from Step 4B steps. It is good to do this because sometimes the structures from 4B might be slightly lower energy than what was obtain from Step 1. 
+We now can obtain the energies and structures for the reactant, product, and transition state. 
 
 **NOTE 1**: We want to take the Gibb's Free Energy, so make sure you take this energy value from the ``output.out`` files. We can obtain this value because we have run the vibrational frequency calculation, which allows the vibrational entropy to be calculated. You will find these if you look for the ``GIBBS FREE ENERGY`` header in the ``output.out`` file. 
 
 **NOTE 2**: The energy values you get will be in hartrees (unit are Eh or Ha). It is important to record the whole hartrees energy value to the full decimal places. 
 
-In this example:
-* The energy of the ``Reactant`` is -1967.08223843 Eh, while the ``Backwards`` structure from Step 4B did not converge. As we saw in Step 5 the ``Reactant`` and ``Backwards`` structures are very similar, so I would not be worried about this, and take the ``Reactant`` structure as the reactant. 
-* The energy of the ``Product`` is -1967.03515273 Eh, while the energy of the ``Forwards`` structure from Step 4B is -1967.03512026 Eh. The ``Product`` structure has a lower energy than the ``Forwards`` structure. 
+From Step 3:
+* Energy(Cu<sup>+</sup>) = -1640.28509927 Eh
+* Energy(benzylamine) = -326.74492712 Eh
+* Total Energy = -1640.28509927 Eh + -326.74492712 Eh = -1967.03002639 Eh
 
-From Step 3, the energy of the transition state is -1967.01474746 Eh. 
+From Step 1:
+* Energy(benzylamine-Cu<sup>+</sup>) = -1967.08223843 Eh
 
 **NOTE 3**: Record all these numbers, as you will need the absolute values when collecting the energy for all the mechanistic step across the one or more mechanisms that you are studying. 
 
 **NOTE 4**: The conversion from Hartrees (Eh or Ha) to kJ/mol to multiply the Hartree energy by 2625.5 to get the energy in kJ/mol
 
-The energy profile for this example is shown below
+From these calculations, we can see that the energy has decreased when Cu binds with benzylamine by $-1967.08223843 \rm{Eh} - -1967.03002639 \rm{Eh} = -0.05221203999 \rm{Eh}$ which in kJ/mol is $-0.05221203999 \rm{Eh} * 2625.5 = -137.1 \rm{kJ/mol}$ (1dp).
 
-![Energy Profile for this example](Figures/6_Info/Energy_Profile.png)
 
-Here: 
-* The energy from the reactant to transition state is $-1967.01474746 \rm{Eh} - -1967.08223843 \rm{Eh} = 0.06749096999 \rm{Eh}$ which in kJ/mol is $0.06749096999 \rm{Eh} * 2625.5 = 177.2 \rm{kJ/mol}$ (1dp).
-* The energy from the product  to transition state is $-1967.01474746 \rm{Eh} - -1967.03515273 \rm{Eh} = 0.02040526999 \rm{Eh}$ which in kJ/mol is $0.02040526999 \rm{Eh} * 2625.5 = 53.6  \rm{kJ/mol}$ (1dp).
 
-So the activation energy for this reaction is 177 kJ/mol. 
+
+
+
+
+
+
+
 
 
 
