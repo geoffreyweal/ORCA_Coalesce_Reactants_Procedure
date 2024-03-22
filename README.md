@@ -361,11 +361,11 @@ viewSCAN False
 
 You will get a GUI that shows you the following SCAN pathway:
 
-![SCAN Images](Figures/2A_SCAN/SCAN_example.gif)
+![SCAN Images](Figures/2_SCAN/SCAN_example.gif)
 
 The energy profile for this example is given below:
 
-![SCAN Energy Profile](Figures/2A_SCAN/SCAN_energy.png)
+![SCAN Energy Profile](Figures/2_SCAN/SCAN_energy.png)
 
 ### Analysis of Output
 
