@@ -1,0 +1,75 @@
+
+The following have been reloaded with a version change:
+  1) GCC/11.3.0 => GCC/9.2.0
+  2) GCCcore/11.3.0 => GCCcore/9.2.0
+  3) binutils/2.38-GCCcore-11.3.0 => binutils/2.32-GCCcore-9.2.0
+  4) zlib/1.2.11-GCCcore-11.3.0 => zlib/1.2.11-GCCcore-9.2.0
+
+
+The following have been reloaded with a version change:
+  1) UCX/1.12.1-GCC-11.3.0 => UCX/1.10.0-GCCcore-9.2.0
+  2) XZ/5.2.5-GCCcore-11.3.0 => XZ/5.2.4-GCCcore-9.2.0
+  3) libxml2/2.9.10-GCCcore-11.3.0 => libxml2/2.9.10-GCCcore-9.2.0
+  4) numactl/2.0.14-GCC-11.3.0 => numactl/2.0.14-GCCcore-9.2.0
+
+srun: Job 44493430 step creation temporarily disabled, retrying (Requested nodes are busy)
+srun: Step created for StepId=44493430.43
+srun: Job 44493430 step creation temporarily disabled, retrying (Requested nodes are busy)
+srun: Step created for StepId=44493430.72
+srun: Job 44493430 step creation temporarily disabled, retrying (Requested nodes are busy)
+srun: Step created for StepId=44493430.85
+srun: error: slurm_receive_msgs: [[wbn236.cm.cluster]:6818] failed: Socket timed out on send/recv operation
+srun: error: slurm_receive_msgs: [[wbn011.cm.cluster]:6818] failed: Socket timed out on send/recv operation
+srun: error: slurm_receive_msgs: [[wbn081.cm.cluster]:6818] failed: Socket timed out on send/recv operation
+srun: error: slurm_receive_msgs: [[wbn011.cm.cluster]:6818] failed: Socket timed out on send/recv operation
+srun: Job 44493430 step creation temporarily disabled, retrying (Requested nodes are busy)
+srun: Step created for StepId=44493430.413
+srun: Job 44493430 step creation temporarily disabled, retrying (Requested nodes are busy)
+srun: Step created for StepId=44493430.445
+srun: Job 44493430 step creation temporarily disabled, retrying (Requested nodes are busy)
+srun: Step created for StepId=44493430.475
+srun: Job 44493430 step creation temporarily disabled, retrying (Requested nodes are busy)
+srun: Step created for StepId=44493430.519
+srun: Job 44493430 step creation temporarily disabled, retrying (Requested nodes are busy)
+srun: Step created for StepId=44493430.774
+srun: Job 44493430 step creation temporarily disabled, retrying (Requested nodes are busy)
+srun: Step created for StepId=44493430.868
+srun: Job 44493430 step creation temporarily disabled, retrying (Requested nodes are busy)
+srun: Step created for StepId=44493430.1499
+srun: Job 44493430 step creation temporarily disabled, retrying (Requested nodes are busy)
+srun: Step created for StepId=44493430.1838
+srun: Job 44493430 step creation temporarily disabled, retrying (Requested nodes are busy)
+srun: Step created for StepId=44493430.2257
+srun: Job 44493430 step creation temporarily disabled, retrying (Requested nodes are busy)
+srun: Step created for StepId=44493430.2273
+srun: Job 44493430 step creation temporarily disabled, retrying (Requested nodes are busy)
+srun: Step created for StepId=44493430.2369
+srun: Job 44493430 step creation temporarily disabled, retrying (Requested nodes are busy)
+srun: Step created for StepId=44493430.3110
+srun: Job 44493430 step creation temporarily disabled, retrying (Requested nodes are busy)
+srun: Step created for StepId=44493430.3284
+srun: Job 44493430 step creation temporarily disabled, retrying (Requested nodes are busy)
+srun: Step created for StepId=44493430.4036
+srun: Job 44493430 step creation temporarily disabled, retrying (Requested nodes are busy)
+srun: Step created for StepId=44493430.4187
+srun: Job 44493430 step creation temporarily disabled, retrying (Requested nodes are busy)
+srun: Step created for StepId=44493430.4223
+srun: Job 44493430 step creation temporarily disabled, retrying (Requested nodes are busy)
+srun: Step created for StepId=44493430.5189
+srun: Job 44493430 step creation temporarily disabled, retrying (Requested nodes are busy)
+srun: Step created for StepId=44493430.5281
+srun: Job 44493430 step creation temporarily disabled, retrying (Requested nodes are busy)
+srun: Step created for StepId=44493430.5623
+srun: error: slurm_receive_msgs: [[wbn236.cm.cluster]:6818] failed: Socket timed out on send/recv operation
+srun: error: slurm_receive_msgs: [[wbn081.cm.cluster]:6818] failed: Socket timed out on send/recv operation
+srun: error: Task launch for StepId=44493430.5854 failed on node wbn236: Socket timed out on send/recv operation
+srun: error: Task launch for StepId=44493430.5854 failed on node wbn081: Socket timed out on send/recv operation
+srun: error: Application launch failed: Socket timed out on send/recv operation
+srun: Job step aborted: Waiting up to 32 seconds for job step to finish.
+slurmstepd: error: *** STEP 44493430.5854 ON wbn011 CANCELLED AT 2024-03-21T01:49:41 ***
+srun: error: wbn081: tasks 16-23: Killed
+srun: error: wbn011: tasks 0-7: Killed
+srun: error: wbn022: tasks 8-15: Killed
+[file orca_tools/qcmsg.cpp, line 465]: 
+  .... aborting the run
+
