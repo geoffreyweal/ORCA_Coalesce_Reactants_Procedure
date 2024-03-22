@@ -415,7 +415,7 @@ From Step 1:
 
 **NOTE 4**: The conversion from Hartrees (Eh or Ha) to kJ/mol to multiply the Hartree energy by 2625.5 to get the energy in kJ/mol
 
-From these calculations, we can see that the energy has decreased when Cu binds with benzylamine by $-1967.08223843 \rm{Eh} - -1967.03002639 \rm{Eh} = -0.05221203999 \rm{Eh}$ which in kJ/mol is $-0.05221203999 \rm{Eh} * 2625.5 = -137.1 \rm{kJ/mol}$ (1dp).
+From these calculations, we can see that the energy has decreased when Cu binds with benzylamine by $-1967.08223843 \rm{Eh} - -1967.03002639 \rm{Eh} = -0.05221203999 \rm{Eh}$ which in kJ/mol is $-0.05221203999 \rm{Eh} \times 2625.5 = -137.1 \rm{kJ/mol}$ (1dp).
 
 
 
