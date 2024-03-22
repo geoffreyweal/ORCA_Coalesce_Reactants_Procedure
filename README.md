@@ -74,7 +74,7 @@ First we need to locally optimize the co-ordinated/coalesced system (following s
 * In this example, the co-ordinated/coalesced system is called the ``Product``. (The ``Product`` here is the ``Reactant`` from the [ORCA Mechanism Procedure example](https://github.com/geoffreyweal/ORCA_Mechanism_Procedure))
 
 
-To do this, make a ``Product`` folder and add to each folder the ``.inp`` file for performing local optimisations. Make sure you include the following into your ``.inp`` files for both the reactant and product:
+To do this, make a ``Product`` folder and add to each folder the ``.inp`` file for performing local optimisations. Make sure you include the following into your ``.inp`` files for the product:
 
 ```
 !OPT FREQ TightOPT TightSCF defgrid2
@@ -111,7 +111,7 @@ END
 
 **NOTE 3**: Make sure you include a newline or two at the end of your ``orca.inp`` file, otherwise ORCA will get confused and not run.
 
-Here, ``xyzfile`` allows you to import an xyz file into ORCA. You can add the xyz data directly in the ``.inp`` file, but I find having a separate ``xyz`` file is better because this allow you to look at the xyz file in a gui like in atomic simulation environment (ASE --> https://wiki.fysik.dtu.dk/ase/ase/gui/basics.html and https://wiki.fysik.dtu.dk/ase/ase/gui/gui.html). Include the ``xyz`` files of your product molecule in the ``Product`` folders, respectively. If your reactants or product contain more than one molecule/chemical system, split them up and localise them individually in their own individual folders. 
+Here, ``xyzfile`` allows you to import an xyz file into ORCA. You can add the xyz data directly in the ``.inp`` file, but I find having a separate ``xyz`` file is better because this allow you to look at the xyz file in a gui like in atomic simulation environment (ASE --> https://wiki.fysik.dtu.dk/ase/ase/gui/basics.html and https://wiki.fysik.dtu.dk/ase/ase/gui/gui.html). Include the ``xyz`` files of your product molecule in the ``Product`` folders, respectively.
 
 Submit the job to slurm using the ``submit.sl`` file:
 
@@ -139,10 +139,6 @@ ${orca_exe} orca.inp > output.out
 ```
 
 **NOTE 4**: While ORCA has been told to use 2000 (MB) * 32 = 64 GB in the ``.inp`` file, we have told slurm to reserve ``72GB`` of memory. It is a good idea to give your ORCA job a few GBs of RAM extra in slurm just in case ORCA accidentally goes over it's allocated RAM. Here, I have abitrarily given this job 12GB more RAM just in case. 
-
-### What to do if you have more than one reactant (or product)
-
-Sometimes if you have more reactant (or product), you may also need to obtain the energy of the reactants (or products) when they are separated. Often you can just calculate these separately as their own ORCA calculations. However, for systems involving metals in particular, it is a good idea to check if there is a transition state for a metal coordinating to a ligand. There probably should not be a transition state, but is good to check. In this case, read the [ORCA Coalesce Reactants Procedure](https://github.com/geoffreyweal/ORCA_Coalesce_Reactants_Procedure) tutorial to understand how to check this. 
 
 
 ### Outputs from ORCA
@@ -199,28 +195,22 @@ You want to look for a table in the ``output.out`` file for a table with the tit
           ----------------------|Geometry convergence|-------------------------
           Item                value                   Tolerance       Converged
           ---------------------------------------------------------------------
-          Energy change      -0.0000006152            0.0000010000      YES
-          RMS gradient        0.0000177282            0.0000300000      YES
-          MAX gradient        0.0000821491            0.0001000000      YES
-          RMS step            0.0004097121            0.0006000000      YES
-          MAX step            0.0015679250            0.0010000000      NO
+          Energy change      -0.0000000633            0.0000010000      YES
+          RMS gradient        0.0000146520            0.0000300000      YES
+          MAX gradient        0.0000503939            0.0001000000      YES
+          RMS step            0.0001725590            0.0006000000      YES
+          MAX step            0.0007414837            0.0010000000      YES
           ........................................................
-          Max(Bonds)      0.0003      Max(Angles)    0.05
-          Max(Dihed)        0.09      Max(Improp)    0.00
+          Max(Bonds)      0.0004      Max(Angles)    0.02
+          Max(Dihed)        0.03      Max(Improp)    0.00
           ---------------------------------------------------------------------
-
-       The energies and gradients are converged
-       and the convergence on bond distances, angles, dihedrals and impropers
-       is acceptable.
-       Convergence will therefore be signaled now
-
 
                     ***********************HURRAY********************
                     ***        THE OPTIMIZATION HAS CONVERGED     ***
                     *************************************************
 ```
 
-In this example, you can see that the majority of the items of interest have converged, and ORCA has happy that the convergence criteria have been met. ORCA also tells you this by giving you a ``HURRAY`` message as well as a ``THE OPTIMIZATION HAS CONVERGED`` message (as you can see in above). 
+ORCA also tells you this by giving you a ``HURRAY`` message as well as a ``THE OPTIMIZATION HAS CONVERGED`` message (as you can see in above). 
 
 #### Check 3: Does the molecule have any non-negative vibrational frequencies
 
@@ -241,54 +231,54 @@ Scaling factor for frequencies =  1.000000000  (already applied!)
    3:         0.00 cm**-1
    4:         0.00 cm**-1
    5:         0.00 cm**-1
-   6:        52.20 cm**-1
-   7:        71.30 cm**-1
-   8:       146.78 cm**-1
-   9:       226.53 cm**-1
-  10:       282.60 cm**-1
-  11:       302.99 cm**-1
-  12:       392.29 cm**-1
-  13:       402.58 cm**-1
-  14:       414.78 cm**-1
-  15:       473.15 cm**-1
-  16:       495.75 cm**-1
-  17:       585.93 cm**-1
-  18:       628.71 cm**-1
-  19:       678.81 cm**-1
-  20:       709.76 cm**-1
-  21:       778.78 cm**-1
-  22:       797.94 cm**-1
-  23:       810.91 cm**-1
-  24:       844.28 cm**-1
-  25:       953.22 cm**-1
-  26:       978.70 cm**-1
-  27:       996.50 cm**-1
-  28:      1019.06 cm**-1
-  29:      1030.63 cm**-1
-  30:      1046.65 cm**-1
-  31:      1102.99 cm**-1
-  32:      1137.60 cm**-1
-  33:      1187.17 cm**-1
-  34:      1210.13 cm**-1
-  35:      1237.46 cm**-1
-  36:      1309.92 cm**-1
-  37:      1358.89 cm**-1
-  38:      1377.61 cm**-1
-  39:      1480.76 cm**-1
-  40:      1514.47 cm**-1
-  41:      1543.18 cm**-1
-  42:      1608.95 cm**-1
-  43:      1633.11 cm**-1
-  44:      1647.22 cm**-1
-  45:      1845.64 cm**-1
-  46:      3184.30 cm**-1
-  47:      3186.78 cm**-1
-  48:      3189.57 cm**-1
-  49:      3192.88 cm**-1
-  50:      3203.72 cm**-1
-  51:      3209.16 cm**-1
-  52:      3487.08 cm**-1
-  53:      3585.59 cm**-1
+   6:        43.32 cm**-1
+   7:        70.57 cm**-1
+   8:       103.93 cm**-1
+   9:       150.58 cm**-1
+  10:       297.27 cm**-1
+  11:       347.68 cm**-1
+  12:       413.00 cm**-1
+  13:       424.12 cm**-1
+  14:       509.82 cm**-1
+  15:       531.31 cm**-1
+  16:       628.64 cm**-1
+  17:       635.82 cm**-1
+  18:       727.65 cm**-1
+  19:       775.31 cm**-1
+  20:       819.16 cm**-1
+  21:       862.24 cm**-1
+  22:       924.51 cm**-1
+  23:       937.85 cm**-1
+  24:       978.42 cm**-1
+  25:       988.87 cm**-1
+  26:      1016.58 cm**-1
+  27:      1021.93 cm**-1
+  28:      1048.64 cm**-1
+  29:      1072.65 cm**-1
+  30:      1103.98 cm**-1
+  31:      1158.35 cm**-1
+  32:      1180.38 cm**-1
+  33:      1195.06 cm**-1
+  34:      1232.03 cm**-1
+  35:      1309.40 cm**-1
+  36:      1344.54 cm**-1
+  37:      1363.42 cm**-1
+  38:      1394.22 cm**-1
+  39:      1483.96 cm**-1
+  40:      1495.53 cm**-1
+  41:      1526.49 cm**-1
+  42:      1618.08 cm**-1
+  43:      1621.16 cm**-1
+  44:      1636.61 cm**-1
+  45:      3066.60 cm**-1
+  46:      3116.54 cm**-1
+  47:      3129.59 cm**-1
+  48:      3172.82 cm**-1
+  49:      3181.46 cm**-1
+  50:      3189.87 cm**-1
+  51:      3199.56 cm**-1
+  52:      3469.06 cm**-1
+  53:      3533.10 cm**-1
 ```
 
 
