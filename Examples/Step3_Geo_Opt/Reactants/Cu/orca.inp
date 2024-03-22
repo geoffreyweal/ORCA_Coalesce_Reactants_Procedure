@@ -1,5 +1,5 @@
-!B3LYP DEF2-TZVP D3BJ
-!OPT NormalOPT TightSCF defgrid2
+!B3LYP DEF2-TZVP D3BJ 
+!FREQ TightSCF defgrid2
 %SCF
     MaxIter 2000       # Here setting MaxIter to a very high number. Intended for systems that require sometimes 1000 iterations before converging (very rare).
     DIISMaxEq 5        # Default value is 5. A value of 15-40 necessary for difficult systems.
@@ -7,8 +7,4 @@
 END
 %CPCM EPSILON 6.02 REFRAC 1.3723 END
 %PAL NPROCS 32 END
-%maxcore 2000
-%geom 
-    SCAN B 2 17 = 2.693, 30.693, 1401 END 
-END
-* xyzfile 1 1 reactant_opt.xyz
+* xyzfile 1 1 Cu.xyz 

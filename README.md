@@ -335,91 +335,93 @@ END
 
 ```
 
+### Outputs from ORCA
+
+As well as the ``output.out`` and ``orca_trj.xyz`` files, ORCA will also get:
+
+* A series of files called ``orca.001.xyz``, ``orca.002.xyz``, ``orca.003.xyz``, ... up to ``orca.126.xyz``. These are the steps in the SCAN process. 
+
+**NOTE**: The ``orca_trj.xyz`` contains the xyz files for every geometric step across all ``orca.ABC.xyz`` file, so it is not as useful in it's own. However make sure you keep it, because it is used by the ``viewSCAN`` program.
+
+To view the SCAN mechanism and the energy path, type ``viewSCAN`` in the terminal and hit enter. This will load a program that will allow you to see how the SCAN calculation performed your mechanism, along with the energy profile. 
+
+```bash
+# cd into your optimisation folder
+cd ORCA_Mechanism_Procedure/Examples/Step2_Find_TS/SCAN
+
+# View the SCAN calculation 
+viewSCAN
+# or save the SCAN_images.xyz file only and copy it back to your computer
+# to view with ``ase gui SCAN_images.xyz`` (if you are using a HPC).
+viewSCAN False
+```
+
 **NOTE 1**: ``viewSCAN`` will also create a xyz file called ``SCAN_images.xyz`` that you can copy to your computer if you are using a high-capacity computer (HPC) system and view on your own computer. 
 * If you just want to create the ``SCAN_images.xyz`` file, type into the terminal ``viewSCAN False`` (which will create the ``SCAN_images.xyz`` file). 
 
 You will get a GUI that shows you the following SCAN pathway:
 
-![SCAN Images](Figures/2_SCAN/SCAN_example.gif)
+![SCAN Images](Figures/2A_SCAN/SCAN_example.gif)
 
 The energy profile for this example is given below:
 
-![SCAN Energy Profile](Figures/2_SCAN/SCAN_energy.png)
+![SCAN Energy Profile](Figures/2A_SCAN/SCAN_energy.png)
+
+### Analysis of Output
+
+Unfortunately, this SCAN failed during the calculation. However it doesnt matter because we only wanted to use the SCAN to understand how the energy changes as the Cu atom dissociates from the benzylamine, which from the GIF we can see the Cu atom has moved well away from the nitrogen atom in benzylamine. So I am happy that there is no transition state and the Cu atom naturally would want to coordinate with the nitrogen atom, as is probably expected. 
+* Note: I am ignoring any energy requirements to remove the solvent shell. This wasn't the point of this exercise. We just wanted to confirm there is no transition state. 
 
 
+### Advice about SCANs
 
+In this example, I got the SCAN calculation to gradually increase the distance between Cu and a carbon in the benzene group. 
+* I actually first tried increasing the distance between the nitrogen of benzylamine and Cu. However, this did not work because the Cu wanted to attach to the benzene via pi-bonding, and then for some reason ORCA kept crashing. 
+* It is common that you need to try the SCAN calculation where you try increasing the distance between different atoms. Some just wont work, and some will work nicely.
+* In this case, it turned out that forcing the increase in distance between the benzene ring (via atom 2) and Cu worked. 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-**NOTE 2**: The energy goes up at the end because the hydrogen atom is probably getting too close to the carbon atom. We can ignore this part of the SCAN, as it is not relavant to us for finding the transition state for this mechanistic step. 
-
-The easiest way to use this GUI is to zoom in on the part of the energy profile looks like the transition state (by clicking on the <img src="https://github.com/geoffreyweal/ORCA_Mechanism_Procedure/blob/main/Figures/2A_SCAN/Magnifying_Glass.png?raw=true" alt="drawing" width="25"/> button), and from this determine the image this corresponds to by looking at the x axis. Move the cursor over the highest point along the energy profile, and read the x value:
-
-![SCAN Energy Profile - Zoomed in on Transition State](Figures/2_SCAN/SCAN_energy_zoomed_in.png)
-
-This is what the given transition state looks like in this example:
-
-![SCAN Energy Profile](Figures/2_SCAN/TS_SCAN.png)
-
-This is a promising transition state, but we need to proceed with steps 3 and 4 to make sure it is ok. 
-
-Once ORCA has finished and you have viewed your SCAN pathway and obtained your transition state, you should do the following check:
-
-#### Check: Does the SCAN path make sense chemically and physically
-
-You will want to look at the SCAN path and check if it chemically and physically makes sense. If it does not, you need to redo the SCAN and try something else, like making the two atoms contract closer to each other rather than stretch, or maybe try contracting or expanding the distance between other atoms.  
-
-#### Advice about SCANs
-
-In this example, I forced the SCAN to gradually decrease the distance between atom 11 (C) and atom 14 (H). However, this is not the only way I could have performed this SCAN. 
-* For example, I could have started with the Cu atom bonded to the N atom, and gradually decrease the distance between atoms 11 (C) and 17 (Cu) to force them to form a bond.
-* I decided to start with Cu inserted into the C-H bond and force the C and H to come together because I thought this was the best way to obtain the transition state for this mechanistic step.
-* It is not uncommon that you need to try a few different SCAN paths to get the transition state you are looking for. 
-
-#### Other Information about performing SCANs in ORCA
+### Other Information about performing SCANs in ORCA
 
 See https://sites.google.com/site/orcainputlibrary/geometry-optimizations/tutorial-saddlepoint-ts-optimization-via-relaxed-scan for more information. 
 
 
+## Step 3: Obtain the energy of the reactants
 
+We now want to repeat step 1 for each of the components in the un-coalesced molecules. In this case, there are two systems, benzylamine and Cu<sup>+</sup>. 
 
+There is nothing new to learn from step 1, everything is exactly the same. See the outputs for this system in ``Examples/Step3_Geo_Opt/Reactants``. 
 
+## Step 4: Check that you are happy
 
+Before finalising everything, it is important to do a final check that everything is all good and that there are no issues with your output files from this proceedure and you are happy with all the calculations and the decisions you made, as this process is often not smooth and requires playing around. So finalising everything is a good idea to make sure you haven't missed anything important. 
 
+## Step 6: Obtain the energies and structures of your reactants, products, and transition state
 
+We now can obtain the energies and structures for the reactant, product, and transition state. To do this, we want to compare the energies of the ``Reactant`` and ``Product`` with the ``Forward`` and ``Backwards`` structure from Step 4B steps. It is good to do this because sometimes the structures from 4B might be slightly lower energy than what was obtain from Step 1. 
 
+**NOTE 1**: We want to take the Gibb's Free Energy, so make sure you take this energy value from the ``output.out`` files. We can obtain this value because we have run the vibrational frequency calculation, which allows the vibrational entropy to be calculated. You will find these if you look for the ``GIBBS FREE ENERGY`` header in the ``output.out`` file. 
 
+**NOTE 2**: The energy values you get will be in hartrees (unit are Eh or Ha). It is important to record the whole hartrees energy value to the full decimal places. 
 
+In this example:
+* The energy of the ``Reactant`` is -1967.08223843 Eh, while the ``Backwards`` structure from Step 4B did not converge. As we saw in Step 5 the ``Reactant`` and ``Backwards`` structures are very similar, so I would not be worried about this, and take the ``Reactant`` structure as the reactant. 
+* The energy of the ``Product`` is -1967.03515273 Eh, while the energy of the ``Forwards`` structure from Step 4B is -1967.03512026 Eh. The ``Product`` structure has a lower energy than the ``Forwards`` structure. 
 
+From Step 3, the energy of the transition state is -1967.01474746 Eh. 
 
+**NOTE 3**: Record all these numbers, as you will need the absolute values when collecting the energy for all the mechanistic step across the one or more mechanisms that you are studying. 
 
+**NOTE 4**: The conversion from Hartrees (Eh or Ha) to kJ/mol to multiply the Hartree energy by 2625.5 to get the energy in kJ/mol
 
+The energy profile for this example is shown below
 
+![Energy Profile for this example](Figures/6_Info/Energy_Profile.png)
 
+Here: 
+* The energy from the reactant to transition state is $-1967.01474746 \rm{Eh} - -1967.08223843 \rm{Eh} = 0.06749096999 \rm{Eh}$ which in kJ/mol is $0.06749096999 \rm{Eh} * 2625.5 = 177.2 \rm{kJ/mol}$ (1dp).
+* The energy from the product  to transition state is $-1967.01474746 \rm{Eh} - -1967.03515273 \rm{Eh} = 0.02040526999 \rm{Eh}$ which in kJ/mol is $0.02040526999 \rm{Eh} * 2625.5 = 53.6  \rm{kJ/mol}$ (1dp).
 
-
-
+So the activation energy for this reaction is 177 kJ/mol. 
 
 
 

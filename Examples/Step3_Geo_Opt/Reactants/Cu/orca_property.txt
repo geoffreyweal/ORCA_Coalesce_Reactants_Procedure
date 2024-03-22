@@ -1,0 +1,155 @@
+-------------------------------------------------------------
+----------------------- !PROPERTIES! ------------------------
+-------------------------------------------------------------
+# -----------------------------------------------------------
+$ PAL_Flags
+   description: The PAL Flags
+   geom. index: 1
+   prop. index: 1
+        Diskflag:     5
+# -----------------------------------------------------------
+$ SCF_Energy
+   description: The SCF energy
+   geom. index: 1
+   prop. index: 1
+        SCF Energy:    -1640.2692305620
+# -----------------------------------------------------------
+$ DFT_Energy
+   description: The DFT energy
+   geom. index: 1
+   prop. index: 1
+   Number of Alpha Electrons                 14.0000000083 
+   Number of Beta  Electrons                 14.0000000083 
+   Total number of  Electrons                28.0000000167 
+   Exchange energy                          -52.2918884261 
+   Correlation energy                        -1.5736777244 
+   Correlation energy NL                      0.0000000000 
+   Exchange-Correlation energy              -53.8655661505 
+   Embedding correction                       0.0000000000 
+   Total DFT Energy (No VdW correction)   -1640.2692305620 
+# -----------------------------------------------------------
+$ Solvation_Details
+   description: Details concerning solvation
+   geom. index: 1
+   prop. index: 1
+     Epsilon:                6.0200000000
+     Refrac:                 1.3723000000
+     RSolv:                  1.3000000000
+     Surface Type:                      2
+     Number of Points:                110
+     Surface Area:         126.6561159650
+     Dielectric Energy:     -0.1349232343
+# -----------------------------------------------------------
+$ Mayer_Pop
+   description: The Mayer population analysis
+   geom. index: 1
+   prop. index: 1
+     Number of atoms                     : 1
+     Threshold for printing              : 0.1000000
+     Number of bond orders printed       : 0
+  NA   - Mulliken gross atomic population
+  ZA   - Total nuclear charge
+  QA   - Mulliken gross atomic charge
+  VA   - Mayer's total valence
+  BVA  - Mayer's bonded valence
+  FA   - Mayer's free valence
+  ATOM       NA         ZA         QA         VA         BVA        FA
+  0   0    28.0000    29.0000     1.0000     0.0000     0.0000     0.0000
+# -----------------------------------------------------------
+$ VdW_Correction
+   description: The Van der Waals Correction
+   geom. index: 1
+   prop. index: 1
+        Van der Waals Correction:        0.0000000000
+# -----------------------------------------------------------
+$ Calculation_Info
+   description: Details of the calculation
+   geom. index: 1
+   prop. index: 1
+     Multiplicity:                          1
+     Charge:                                1
+     number of atoms:                       1
+     number of electrons:                   0
+     number of frozen core electrons:       1
+     number of correlated electrons:        0
+     number of basis functions:             45
+     number of aux C basis functions:       0
+     number of aux J basis functions:       91
+     number of aux JK basis functions:      0
+     number of aux CABS basis functions:    0
+     Total Energy                           -1640.269231
+# -----------------------------------------------------------
+$ SCF_Electric_Properties
+   description: The SCF Calculated Electric Properties
+   geom. index: 1
+   prop. index: 1
+       Filename                          : orca.scfp 
+       Do Dipole Moment Calculation      : true 
+       Do Quadrupole Moment Calculation  : false 
+       Do Polarizability Calculation     : false 
+** Dipole moment part of electric properties **
+        Magnitude of dipole moment (Debye) :        0.0000004780
+        Electronic Contribution:
+                  0    
+      0       0.000000
+      1      -0.000000
+      2      -0.000000
+        Nuclear Contribution:
+                  0    
+      0       0.000000
+      1       0.000000
+      2       0.000000
+        Total Dipole moment:
+                  0    
+      0       0.000000
+      1      -0.000000
+      2      -0.000000
+# -----------------------------------------------------------
+$ Hessian
+   description: Details about the Hessian
+   geom. index: 1
+   prop. index: 1
+Normal modes:
+Number of Rows: 3 Number of Columns: 3
+                  0          1          2    
+      0       0.000000   0.000000   0.000000
+      1       0.000000   0.000000   0.000000
+      2       0.000000   0.000000   0.000000
+# -----------------------------------------------------------
+$ THERMOCHEMISTRY_Energies
+   description: The Thermochemistry energies
+   geom. index: 1
+   prop. index: 1
+        Temperature (Kelvin)           :        298.1500000000
+        Pressure (atm)                 :          1.0000000000
+        Total Mass (AMU)               :         63.5500000000
+        Spin Degeneracy                :          1.0000000000
+        Electronic Energy (Hartree)    :      -1640.2692305620
+        Translational Energy (Hartree) :          0.0014162714
+        Rotational Energy (Hartree)    :          0.0000000000
+        Vibrational Energy (Hartree)   :          0.0000000000
+        Number of frequencies          :     3      
+        Scaling Factor for frequencies :          1.0000000000
+        Vibrational frequencies        :     
+                  0    
+      0       0.000000
+      1       0.000000
+      2       0.000000
+        Zero Point Energy (Hartree)    :          0.0000000000
+        Inner Energy (Hartree)         :      -1640.2678142906
+        Enthalpy (Hartree)             :      -1640.2668700816
+        Electronic entropy             :          0.0000000000
+        Rotational entropy             :          0.0000000000
+        Vibrational entropy            :          0.0000000000
+        Translational entropy          :          0.0000000000
+        Entropy                        :          0.0182291851
+        Gibbs Energy (Hartree)         :      -1640.2850992667
+        Is Linear                      :                 false
+# -------------------------------------------------------------
+----------------------- !GEOMETRIES! ------------------------
+# -------------------------------------------------------------
+------------------------ !GEOMETRY! -------------------------
+    Number of atoms:    1 
+    Geometry Index:     1 
+    Coordinates:
+               0 Cu    21.320490000000    4.523520000000   13.547260000000
